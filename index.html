@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Jogo educativo de blocos sobre a Reforma Protestante"
+    >
+
+    <title>Blocos da Reforma</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+</head>
+
+<body>
+
+    <!-- =========================
+         CABEÇALHO
+    ========================== -->
+
+    <header class="topbar">
+
+        <div class="brand">
+
+            <div class="brand-mark">
+                BR
+            </div>
+
+            <div class="brand-text">
+
+                <strong>
+                    Blocos da Reforma
+                </strong>
+
+                <span>
+                    História, estratégia e conhecimento
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button
+            id="themeToggle"
+            class="icon-button"
+            type="button"
+            aria-label="Alternar tema"
+            title="Alternar tema"
+        >
+            ☾
+        </button>
+
+    </header>
+
+
+
+    <main>
+
+
+        <!-- =========================
+             TELA INICIAL
+        ========================== -->
+
+        <section
+            id="startScreen"
+            class="start-screen"
+        >
+
+            <div class="start-card">
+
+                <span class="eyebrow">
+                    Jogo educativo
+                </span>
+
+
+                <h1>
+                    Blocos da
+
+                    <span>
+                        Reforma
+                    </span>
+                </h1>
+
+
+                <p class="start-description">
+
+                    Organize as peças no tabuleiro, complete linhas
+                    e colunas e enfrente desafios sobre a Reforma
+                    Protestante e a crise da Igreja Católica.
+
+                </p>
+
+
+                <div class="intro-grid">
+
+
+                    <article class="intro-item">
+
+                        <div class="intro-number">
+                            01
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Organize os blocos
+                            </h3>
+
+                            <p>
+                                Posicione as peças livremente em uma
+                                grade de oito por oito.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="intro-item">
+
+                        <div class="intro-number">
+                            02
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Complete seções
+                            </h3>
+
+                            <p>
+                                Preencha uma linha ou coluna inteira
+                                para eliminá-la do tabuleiro.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                    <article class="intro-item">
+
+                        <div class="intro-number">
+                            03
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                Responda desafios
+                            </h3>
+
+                            <p>
+                                Cada seção eliminada desbloqueia uma
+                                questão histórica.
+                            </p>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+
+                <button
+                    id="startButton"
+                    class="primary-button large-button"
+                    type="button"
+                >
+                    Iniciar jogo
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =========================
+             TELA DO JOGO
+        ========================== -->
+
+        <section
+            id="gameScreen"
+            class="game-screen hidden"
+        >
+
+            <div class="game-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        Desafio histórico
+                    </span>
+
+                    <h2>
+                        Blocos da Reforma
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="gameStatus"
+                    class="game-status"
+                >
+                    Partida em andamento
+                </div>
+
+            </div>
+
+
+
+            <div class="game-layout">
+
+
+                <!-- =========================
+                     ÁREA PRINCIPAL
+                ========================== -->
+
+                <div class="game-main">
+
+
+                    <div class="score-banner">
+
+                        <div>
+
+                            <span>
+                                Pontuação
+                            </span>
+
+                            <strong id="mainScore">
+                                0
+                            </strong>
+
+                        </div>
+
+
+                        <div class="record-score">
+
+                            <span>
+                                Recorde
+                            </span>
+
+                            <strong id="bestScore">
+                                0
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TABULEIRO -->
+
+                    <div class="board-wrapper">
+
+                        <div
+                            id="blockBoard"
+                            class="block-board"
+                            aria-label="Tabuleiro do jogo"
+                        ></div>
+
+                    </div>
+
+
+
+                    <!-- PEÇAS -->
+
+                    <div class="pieces-area">
+
+                        <div class="pieces-heading">
+
+                            <div>
+
+                                <span class="eyebrow">
+                                    Peças disponíveis
+                                </span>
+
+                                <h3>
+                                    Escolha uma peça
+                                </h3>
+
+                            </div>
+
+
+                            <p>
+                                Arraste ou clique para selecionar.
+                            </p>
+
+                        </div>
+
+
+                        <div
+                            id="pieceTray"
+                            class="piece-tray"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =========================
+                     PAINEL LATERAL
+                ========================== -->
+
+                <aside class="side-panel">
+
+
+                    <div class="panel-header">
+
+                        <span class="panel-label">
+                            Estado da partida
+                        </span>
+
+
+                        <div class="status-box">
+
+                            <div class="status-icon">
+                                ◫
+                            </div>
+
+                            <div>
+
+                                <small>
+                                    Situação
+                                </small>
+
+                                <strong id="statusText">
+                                    Jogando
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="stats-grid">
+
+
+                        <article class="stat-card">
+
+                            <span>
+                                Acertos
+                            </span>
+
+                            <strong id="correctAnswers">
+                                0
+                            </strong>
+
+                            <small>
+                                perguntas corretas
+                            </small>
+
+                        </article>
+
+
+                        <article class="stat-card">
+
+                            <span>
+                                Seções
+                            </span>
+
+                            <strong id="clearedSections">
+                                0
+                            </strong>
+
+                            <small>
+                                linhas e colunas
+                            </small>
+
+                        </article>
+
+                    </div>
+
+
+
+                    <div class="panel-section">
+
+                        <div class="section-heading">
+                            Peça selecionada
+                        </div>
+
+
+                        <div
+                            id="selectedPieceInfo"
+                            class="selected-piece-info"
+                        >
+
+                            <span class="empty-selection">
+                                Nenhuma peça selecionada
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="panel-section">
+
+                        <div class="section-heading">
+                            Como jogar
+                        </div>
+
+
+                        <div class="rules">
+
+                            <p>
+                                Escolha uma das três peças disponíveis.
+                            </p>
+
+                            <p>
+                                Posicione a peça em uma área vazia da grade.
+                            </p>
+
+                            <p>
+                                Complete uma linha ou coluna inteira para
+                                eliminá-la.
+                            </p>
+
+                            <p>
+                                Quando uma seção for eliminada, uma pergunta
+                                de História será aberta.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <button
+                        id="restartButton"
+                        class="secondary-button"
+                        type="button"
+                    >
+                        Reiniciar partida
+                    </button>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================
+         MODAL DE PERGUNTA
+    ========================== -->
+
+    <div
+        id="questionModal"
+        class="modal-overlay hidden"
+        role="dialog"
+        aria-modal="true"
+    >
+
+        <div class="modal question-modal">
+
+
+            <div class="modal-top">
+
+
+                <div>
+
+                    <span class="eyebrow">
+                        Desafio histórico
+                    </span>
+
+                    <h2>
+                        Reforma Protestante
+                    </h2>
+
+                </div>
+
+
+                <div
+                    id="questionCounter"
+                    class="question-counter"
+                >
+                    1
+                </div>
+
+            </div>
+
+
+
+            <div class="question-content">
+
+
+                <span
+                    id="questionCategory"
+                    class="category"
+                >
+                    Contexto histórico
+                </span>
+
+
+                <h3 id="questionText">
+                    Pergunta
+                </h3>
+
+
+
+                <div
+                    id="questionOptions"
+                    class="question-options"
+                ></div>
+
+
+
+                <div
+                    id="answerFeedback"
+                    class="answer-feedback hidden"
+                >
+
+                    <strong id="feedbackTitle">
+                    </strong>
+
+                    <p id="feedbackExplanation">
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                id="continueButton"
+                class="primary-button hidden"
+                type="button"
+            >
+                Continuar partida
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         MODAL FIM DE JOGO
+    ========================== -->
+
+    <div
+        id="gameOverModal"
+        class="modal-overlay hidden"
+        role="dialog"
+        aria-modal="true"
+    >
+
+        <div class="modal game-over-modal">
+
+
+            <span class="eyebrow">
+                Fim da partida
+            </span>
+
+
+            <h2>
+                Sem movimentos disponíveis
+            </h2>
+
+
+            <p>
+
+                Nenhuma das peças restantes pode ser posicionada
+                no tabuleiro.
+
+            </p>
+
+
+
+            <div class="final-stats">
+
+
+                <div>
+
+                    <span>
+                        Pontuação
+                    </span>
+
+                    <strong id="finalScore">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Acertos
+                    </span>
+
+                    <strong id="finalCorrect">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Seções
+                    </span>
+
+                    <strong id="finalSections">
+                        0
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <button
+                id="playAgainButton"
+                class="primary-button"
+                type="button"
+            >
+                Jogar novamente
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
